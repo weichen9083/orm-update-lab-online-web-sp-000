@@ -39,7 +39,6 @@ class Student
   def self.new_from_db(row)
     new_student = Student.new(row[0],row[1],row[2])
 
- 
   end 
   
   def update
@@ -50,6 +49,12 @@ class Student
   def self.create(name,grade)
     new_student = self.new(name,grade)
     new_student.save 
+  end 
+  
+  def self.find_by_name(name)
+    sql = "select * from students where name = ?"
+    row = DB[:conn].execute(sql, name) 
+    self.new_from_db(row)
   end 
   
 
