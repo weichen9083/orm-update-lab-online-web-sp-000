@@ -1,5 +1,5 @@
 require_relative "../config/environment.rb"
-require "pry"
+
 
 class Student
 
@@ -11,6 +11,7 @@ class Student
     @id = id
     @name = name
     @grade = grade 
+    save
   end 
   
   def self.create_table
@@ -55,7 +56,6 @@ class Student
   def self.find_by_name(name)
     sql = "select * from students where name = ?"
     row = DB[:conn].execute(sql, name) 
-    binding.pry 
     self.new_from_db(row)
   end 
   
